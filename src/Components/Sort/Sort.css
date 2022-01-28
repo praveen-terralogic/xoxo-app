@@ -1,0 +1,46 @@
+.sort-bar{
+    display: flex;
+    justify-content: space-between;
+    padding:1.5rem .75rem;
+    border-top: 6px solid #c7417b;
+    border-bottom: 1px solid #eef0f2;
+    margin-bottom: 1.5rem;
+}
+.breadcrumb{
+    padding: 0px;
+    display: inline-flex;
+}
+.breadcrumb li{
+    list-style: none;
+    padding-right: 1em;
+}
+.breadcrumb li{
+    list-style: none;
+    padding-right: 1em;
+    position: relative;
+}
+.breadcrumb li a{
+    color: #24292e;
+    text-decoration: none;
+}
+.breadcrumb li::before {
+    content: "/";
+    position: absolute;
+    left: -11px;
+  }
+  .breadcrumb li:first-child::before  {
+    display: none;
+  }
+  .sort-result{
+      font-weight: 500;
+  }
+  .sort-result span{
+      color: #c7417b;
+  }
+  .sort-bar-right{
+      display: flex;
+      align-items: center;
+  }
+  .sort-bar-right label{
+      padding-right: 0.75rem;
+  }

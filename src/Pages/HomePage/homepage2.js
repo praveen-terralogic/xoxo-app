@@ -56,32 +56,19 @@ function Homepage() {
           </div>
           <div className="col-lg-9">
             <main id='voucher-data'>
-            {
-                (IsLoading) ?
-                <p> Loading data...</p> :
               <div className='row'>
               {
-                (CategoriesList.length === 0) ?
-                VoucherList.map((voucher) => 
-                <VoucherCard
-                  key={voucher.id}
-                  id={voucher.id}
-                  VoucherImg={voucher.image}
-                  VoucherTitle={voucher.title}
-                  VoucherPrice={Math.floor(voucher.price)}
-                />) : 
-                VoucherList.filter(item => CategoriesList.includes(item.category)).map((voucher) => 
-                <VoucherCard
-                  key={voucher.id}
-                  id={voucher.id}
-                  VoucherImg={voucher.image}
-                  VoucherTitle={voucher.title}
-                  VoucherPrice={Math.floor(voucher.price)}
-                />
-                )
-              }
+                (IsLoading) ? 
+                <p>Loading data...</p> : VoucherList.map((voucher) => 
+                  <VoucherCard
+                    key={voucher.id}
+                    id={voucher.id}
+                    VoucherImg={voucher.image}
+                    VoucherTitle={voucher.title}
+                    VoucherPrice={Math.floor(voucher.price)}
+                  />
+                  )}
               </div>
-            }
             </main>
           </div>
         </div>

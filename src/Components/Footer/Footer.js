@@ -1,9 +1,15 @@
 import './Footer.css';
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
     <footer>
-      <h1>Hello Footer</h1>
+      <ul className='footer-nav mb-0'>
+        <li><Link to="/">Terms of use</Link></li>
+        <li><Link to="/">Privacy Policy</Link></li>
+        <li><Link to="/">Security</Link></li>
+      </ul>
+      <p className='copyright mb-0' >© Copyright Xoxoday.com</p>
     </footer>
   );
 }
