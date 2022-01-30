@@ -8,6 +8,7 @@ import VoucherCard from '../../Components/VoucherCard/VoucherCard';
 function Homepage() {
   const [VoucherList, SetVoucherList] = useState([]);
   const [CategoriesList, SetCategoriesList] = useState([]);
+  const [SortFilter, SetSortFilter] = useState("a-z");
   const [IsLoading, SetIsLoading] = useState(false);
 
   // Fetch books from server
@@ -44,11 +45,17 @@ function Homepage() {
     // console.log(CategoriesList);
     // console.log(category);
   };
+
+  // Handel Sort Change
+  const handleSort = (event) => { 
+    SetSortFilter(event.target.value);
+    // console.log(event.target.value);
+  };
   
 
   return (
     <div className="homepage">
-      <Sort />
+      <Sort Action={handleSort}/>
       <div className='container-fluid'>
         <div className="row">
           <div className="col-lg-3 p-0">
@@ -58,9 +65,59 @@ function Homepage() {
             <main id='voucher-data'>
             {
                 (IsLoading) ?
-                <p> Loading data...</p> :
+                // if loading data
+                <p> Loading data...</p> 
+                :
+                // if loaded data
               <div className='row'>
               {
+                // if sorting data "a-z" data
+                (SortFilter === "a-z") ?
+                // if no category selected
+                (CategoriesList.length === 0) ?
+                VoucherList.sort((a, b) => a.title.localeCompare(b.title)).map((voucher) => 
+                <VoucherCard
+                  key={voucher.id}
+                  id={voucher.id}
+                  VoucherImg={voucher.image}
+                  VoucherTitle={voucher.title}
+                  VoucherPrice={Math.floor(voucher.price)}
+                />) : 
+                // if some category selected
+                VoucherList.filter(item => CategoriesList.includes(item.category)).sort((a, b) => a.title.localeCompare(b.title)).map((voucher) => 
+                <VoucherCard
+                  key={voucher.id}
+                  id={voucher.id}
+                  VoucherImg={voucher.image}
+                  VoucherTitle={voucher.title}
+                  VoucherPrice={Math.floor(voucher.price)}
+                />
+                ) 
+                :
+                // if sorting data "z-a" data
+                (SortFilter === "z-a") ?
+                // if no category selected
+                (CategoriesList.length === 0) ?
+                VoucherList.sort((a, b) => b.title.localeCompare(a.title)).map((voucher) => 
+                <VoucherCard
+                  key={voucher.id}
+                  id={voucher.id}
+                  VoucherImg={voucher.image}
+                  VoucherTitle={voucher.title}
+                  VoucherPrice={Math.floor(voucher.price)}
+                />) : 
+                // if some category selected
+                VoucherList.filter(item => CategoriesList.includes(item.category)).sort((a, b) => b.title.localeCompare(a.title)).map((voucher) => 
+                <VoucherCard
+                  key={voucher.id}
+                  id={voucher.id}
+                  VoucherImg={voucher.image}
+                  VoucherTitle={voucher.title}
+                  VoucherPrice={Math.floor(voucher.price)}
+                />
+                ) 
+                :
+                // if sorting data "most-recent" data
                 (CategoriesList.length === 0) ?
                 VoucherList.map((voucher) => 
                 <VoucherCard

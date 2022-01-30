@@ -1,7 +1,7 @@
 import './Sort.css';
 import { Link } from "react-router-dom";
 
-function Sort() {
+function Sort(props) {
   return (
     <div className='container-fluid sort-bar'>
       <div className='sort-bar-left'>
@@ -13,10 +13,10 @@ function Sort() {
       </div>
       <div className='sort-bar-right'>
         <label htmlFor="sort-select">Sort:</label>
-        <select className="form-select " id="sort-select">
-          <option defaultValue vlaue="a-z">Name A to Z</option>
+        <select className="form-select" id="sort-select" onChange={(event) => props.Action(event)}>
+          <option defaultValue value="a-z">Name A to Z</option>
           <option value="z-a">Name Z to A</option>
-          <option value="most-resent">Most Recent</option>
+          <option value="most-recent">Most Recent</option>
         </select>
       </div>
     </div>
