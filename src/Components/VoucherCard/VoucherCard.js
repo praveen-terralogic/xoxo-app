@@ -10,8 +10,9 @@ function VoucherCard(props) {
           <div className='voucher-card-image text-center'>
           <Link to={{
             pathname:`/voucher/${FixURL(props.VoucherInfo.title)}`,
-            state : {
-              voucher : props.VoucherInfo}
+            state:{
+              PassVoucher:props.VoucherInfo
+            }
           }} className='text-decoration-none' >
             <img className="img-fluid" src={props.VoucherInfo.image} alt="Hello" />
             </Link>
@@ -19,8 +20,9 @@ function VoucherCard(props) {
           <div className='voucher-card-content'>
           <Link to={{
             pathname:`/voucher/${FixURL(props.VoucherInfo.title)}`,
-            state : {
-              voucher : props.VoucherInfo}
+            state:{
+              PassVoucher:props.VoucherInfo
+            }
           }} className='text-decoration-none' >
             <h2 title={props.VoucherInfo.title} className="voucher-title">{props.VoucherInfo.title}</h2>
             </Link>
