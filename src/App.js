@@ -4,6 +4,7 @@ import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import HomePage from './Pages/HomePage/Homepage'
 import Cart from './Pages/Cart/Cart'
+import VoucherPage from './Pages/VoucherPage/VoucherPage'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} exact />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/voucher/:id" element={<VoucherPage />} />
       </Routes>
        <Footer />
       </Router>

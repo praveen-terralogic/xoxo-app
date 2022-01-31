@@ -1,0 +1,14 @@
+.voucherpage .sort-bar {
+  border: none;
+}
+.voucher-wrapper {
+  min-height: calc(100vh - 160px);
+  align-items: center;
+  display: flex;
+}
+.voucher-wrapper-inner {
+  width: 100%;
+}
+.voucher-wrapper-image-inner img {
+  max-height: 50vh;
+}
