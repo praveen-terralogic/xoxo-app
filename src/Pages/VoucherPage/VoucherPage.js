@@ -1,31 +1,29 @@
 import './VoucherPage.css';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {useState, useEffect} from "react";
+import axios from "axios";
 
-function VoucherPage(props) {
-    const [Voucher, SetVoucher] = useState({
-        "id":4,
-        "title":"Mens Casual Slim Fit",
-        "price":15.99,
-        "description":"The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
-        "category":"men's clothing",
-        "image":"https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-        "rating":{"rate":2.1,"count":430}
-    });
+function VoucherPage() {
+    const [Voucher, SetVoucher] = useState({});
 
-    // let{PassVoucher} = props.location.state;
-    // console.log(PassVoucher);
+    let param = useParams();
+    const FixURL = (url) => url.replace(/[^a-zA-Z ]/g, "").replace(/\s+/g, '-').toLowerCase();
 
     useEffect(() => {
   
-      // updateVoucher();
+      updateVoucher();
   
     },[]);
 
     // Update Voucher
-  const updateVoucher = (event) => { 
-    // SetVoucher(event.target.value);
-    // console.log(props.location.PassVoucher);
+  const updateVoucher = () => {
+    axios
+    .get("https://fakestoreapi.com/products")
+    .then((res) => {
+      SetVoucher(res.data.find(voucher => FixURL(voucher.title) === param.id));
+      console.log(Voucher);
+    })
+    .catch((err) => console.log(err));
   };
 
   return (
