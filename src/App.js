@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import HomePage from './Pages/HomePage/Homepage'
-import Cart from './Pages/Cart/Cart'
-import VoucherPage from './Pages/VoucherPage/VoucherPage'
+import Cart from './Pages/Cart/Cart';
+import VoucherPage from './Pages/VoucherPage/VoucherPage';
+import AdminPage from './Pages/AdminPage/AdminPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<HomePage />} exact />
         <Route path="/cart" element={<Cart />} />
         <Route path="/voucher/:id" element={<VoucherPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
        <Footer />
       </Router>
