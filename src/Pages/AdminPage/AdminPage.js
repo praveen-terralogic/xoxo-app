@@ -1,6 +1,7 @@
 import "./AdminPage.css";
 import { useState } from "react";
-import CountryList from "../../assets/CountryList.json";
+import initialState from "../../Store/initialState.json";
+import { useSelector, useDispatch } from "react-redux";
 
 function AdminPage() {
   const [Voucher, SetVoucher] = useState({
@@ -8,9 +9,28 @@ function AdminPage() {
     price: "",
     category: "",
     description: "",
-    image: "",
+    image:
+      "https://boltagency.ca/content/images/2020/03/placeholder-images-product-1_large.png",
     country_id: "",
   });
+
+  const dispatch = useDispatch();
+  const myVoucher = useSelector((state) => state.voucherList);
+
+  const addNewVoucher = (e) => {
+    e.preventDefault();
+    let obj = {
+      id: myVoucher.length + 1,
+      title: Voucher.title,
+      price: Number(Voucher.price),
+      category: Voucher.category,
+      description: Voucher.description,
+      image: Voucher.image,
+      country_id: Number(Voucher.country_id),
+    };
+    dispatch({ type: "addNewVoucher", value: obj });
+    console.log(myVoucher);
+  };
 
   // Handel Input Change
   const handleChange = (e) => {
@@ -76,7 +96,7 @@ function AdminPage() {
             aria-labelledby="home-tab"
           >
             <h2 className="my-2">Genrate Brand Voucher</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={addNewVoucher}>
               <div className="row">
                 <div className="col-lg-3">
                   <div className="form-group">
@@ -92,7 +112,7 @@ function AdminPage() {
                       required
                     >
                       <option defaultValue>All countries</option>
-                      {CountryList.countryList.map((country) => (
+                      {initialState.countryList.map((country) => (
                         <option
                           value={country.country_id}
                           key={country.country_id}
@@ -147,10 +167,10 @@ function AdminPage() {
                       required
                     >
                       <option defaultValue>Select Category</option>
-                      <option value="1">Electronics</option>
-                      <option value="2">Jewelery</option>
-                      <option value="3">Women's Clothing</option>
-                      <option value="4">Men's Clothing</option>
+                      <option value="electronics">Electronics</option>
+                      <option value="jewelery">Jewelery</option>
+                      <option value="women's clothing">Women's Clothing</option>
+                      <option value="men's clothing">Men's Clothing</option>
                     </select>
                   </div>
                 </div>
