@@ -1,14 +1,15 @@
 import "./AdminPage.css";
 import { useState } from "react";
+import CountryList from "../../assets/CountryList.json";
 
 function AdminPage() {
-  const [VoucherList, SetVoucherList] = useState([]);
   const [Voucher, SetVoucher] = useState({
     title: "",
     price: "",
     category: "",
     description: "",
-    image: null,
+    image: "",
+    country_id: "",
   });
 
   // Handel Input Change
@@ -17,9 +18,9 @@ function AdminPage() {
   };
 
   // Handel Input Change
-  const handleFileChange = (e) => {
-    SetVoucher({ ...Voucher, [e.target.name]: e.target.files[0] });
-  };
+  // const handleFileChange = (e) => {
+  //   SetVoucher({ ...Voucher, [e.target.name]: e.target.files[0] });
+  // };
 
   // Update Voucher to server
   const handleSubmit = (e) => {
@@ -31,6 +32,7 @@ function AdminPage() {
     formData.append("description", Voucher.description);
     formData.append("image", Voucher.image);
     console.log(formData);
+    console.log(Voucher);
   };
 
   return (
@@ -78,15 +80,26 @@ function AdminPage() {
               <div className="row">
                 <div className="col-lg-3">
                   <div className="form-group">
-                    <label htmlFor="sort-select">
-                      Select a country for brand voucher
+                    <label htmlFor="country_id">
+                      Select a country for brand voucher*
                     </label>
-                    <select className="form-select" id="sort-select" required>
-                      <option defaultValue value="a-z">
-                        All countries
-                      </option>
-                      <option value="z-a">Name Z to A</option>
-                      <option value="most-recent">Most Recent</option>
+                    <select
+                      className="form-select"
+                      id="country_id"
+                      name="country_id"
+                      onChange={handleChange}
+                      value={Voucher.country_id}
+                      required
+                    >
+                      <option defaultValue>All countries</option>
+                      {CountryList.countryList.map((country) => (
+                        <option
+                          value={country.country_id}
+                          key={country.country_id}
+                        >
+                          {country.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -94,12 +107,12 @@ function AdminPage() {
               <div className="row mt-4">
                 <div className="col-lg-3 mb-3">
                   <div className="form-group">
-                    <label htmlFor="title">Voucher Title</label>
+                    <label htmlFor="title">Voucher Title*</label>
                     <input
                       type="text"
                       className="form-control"
                       id="title"
-                      placeholder="Voucher Title*"
+                      placeholder="Voucher Title"
                       name="title"
                       onChange={handleChange}
                       value={Voucher.title}
@@ -109,12 +122,12 @@ function AdminPage() {
                 </div>
                 <div className="col-lg-3 mb-3">
                   <div className="form-group">
-                    <label htmlFor="price">Voucher Price</label>
+                    <label htmlFor="price">Voucher Price*</label>
                     <input
                       type="number"
                       className="form-control"
                       id="price"
-                      placeholder="Voucher Price*"
+                      placeholder="Voucher Price"
                       name="price"
                       onChange={handleChange}
                       value={Voucher.price}
@@ -124,7 +137,7 @@ function AdminPage() {
                 </div>
                 <div className="col-lg-3 mb-3">
                   <div className="form-group">
-                    <label htmlFor="category">Voucher Category</label>
+                    <label htmlFor="category">Voucher Category*</label>
                     <select
                       className="form-select"
                       id="category"
@@ -144,20 +157,22 @@ function AdminPage() {
                 <div className="col-lg-3 mb-3"></div>
                 <div className="col-lg-3 mb-3">
                   <div className="form-group">
-                    <label htmlFor="image">Voucher Image</label>
+                    <label htmlFor="image">Voucher Image URL*</label>
                     <input
-                      type="file"
-                      className="form-control-file"
+                      type="text"
+                      className="form-control"
                       id="image"
+                      placeholder="Voucher Image URL"
                       name="image"
-                      onChange={handleFileChange}
+                      onChange={handleChange}
+                      value={Voucher.image}
                       required
                     />
                   </div>
                 </div>
                 <div className="col-lg-6 mb-3">
                   <div className="form-group">
-                    <label htmlFor="description">Voucher Description</label>
+                    <label htmlFor="description">Voucher Description*</label>
                     <textarea
                       type="text"
                       className="form-control form-control-textarea"
