@@ -1,6 +1,5 @@
 import "./AdminPage.css";
 import { useState } from "react";
-import initialState from "../../Store/initialState.json";
 import { useSelector, useDispatch } from "react-redux";
 
 function AdminPage() {
@@ -15,21 +14,19 @@ function AdminPage() {
   });
 
   const dispatch = useDispatch();
-  const myVoucher = useSelector((state) => state.voucherList);
+  const voucherList = useSelector((state) => state.voucherList);
+  const countryList = useSelector((state) => state.countryList);
 
   const addNewVoucher = (e) => {
     e.preventDefault();
-    let obj = {
-      id: myVoucher.length + 1,
-      title: Voucher.title,
-      price: Number(Voucher.price),
-      category: Voucher.category,
-      description: Voucher.description,
-      image: Voucher.image,
-      country_id: Number(Voucher.country_id),
-    };
-    dispatch({ type: "addNewVoucher", value: obj });
-    console.log(myVoucher);
+    dispatch({
+      type: "addNewVoucher",
+      value: {
+        id: voucherList.length + 1,
+        ...Voucher,
+      },
+    });
+    console.log(voucherList);
   };
 
   // Handel Input Change
@@ -43,17 +40,17 @@ function AdminPage() {
   // };
 
   // Update Voucher to server
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("title", Voucher.title);
-    formData.append("price", Voucher.price);
-    formData.append("category", Voucher.category);
-    formData.append("description", Voucher.description);
-    formData.append("image", Voucher.image);
-    console.log(formData);
-    console.log(Voucher);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append("title", Voucher.title);
+  //   formData.append("price", Voucher.price);
+  //   formData.append("category", Voucher.category);
+  //   formData.append("description", Voucher.description);
+  //   formData.append("image", Voucher.image);
+  //   console.log(formData);
+  //   console.log(Voucher);
+  // };
 
   return (
     <div className="adminpage my-5">
@@ -112,7 +109,7 @@ function AdminPage() {
                       required
                     >
                       <option defaultValue>All countries</option>
-                      {initialState.countryList.map((country) => (
+                      {countryList.map((country) => (
                         <option
                           value={country.country_id}
                           key={country.country_id}
