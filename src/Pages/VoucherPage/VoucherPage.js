@@ -42,11 +42,13 @@ function VoucherPage() {
               <Link to="/">Gift Vouchers</Link>
             </li>
             <li>
-              <Link to="/">Category</Link>
+              <Link to="/" className="text-capitalize">
+                {Voucher.category}
+              </Link>
             </li>
             <li>
-              <Link to="/" className="active">
-                Gift Vouchers
+              <Link to="#" className="active">
+                {Voucher.title}
               </Link>
             </li>
           </ul>
