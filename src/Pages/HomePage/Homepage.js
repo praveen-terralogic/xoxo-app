@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 function Homepage() {
   const [CategoriesList, SetCategoriesList] = useState([]);
-  const [SortFilter, SetSortFilter] = useState("a-z");
+  const [SortFilter, SetSortFilter] = useState("most-recent");
 
   const voucherList = useSelector((state) => state.voucherList);
   console.log(voucherList);
@@ -31,7 +31,7 @@ function Homepage() {
 
   return (
     <div className="homepage">
-      <Sort Action={handleSort} />
+      <Sort Action={handleSort} Sort={SortFilter} />
       <div className="container-fluid">
         <div className="row">
           <div className="col-lg-3 p-0 sidebar-wrapper">
@@ -97,14 +97,17 @@ function Homepage() {
                     : // if sorting data "most-recent" data
                     CategoriesList.length === 0
                     ? // if no category selected
-                      voucherList.map((voucher) => (
-                        <VoucherCard key={voucher.id} VoucherInfo={voucher} />
-                      ))
+                      voucherList
+                        .sort((a, b) => a.id - b.id)
+                        .map((voucher) => (
+                          <VoucherCard key={voucher.id} VoucherInfo={voucher} />
+                        ))
                     : // if some category selected
                       voucherList
                         .filter((item) =>
                           CategoriesList.includes(item.category)
                         )
+                        .sort((a, b) => a.id - b.id)
                         .map((voucher) => (
                           <VoucherCard key={voucher.id} VoucherInfo={voucher} />
                         ))

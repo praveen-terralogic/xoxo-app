@@ -25,7 +25,7 @@ function VoucherPage() {
         SetVoucher(
           res.data.find((voucher) => FixURL(voucher.title) === param.id)
         );
-        console.log(Voucher);
+        // console.log(Voucher);
       })
       .catch((err) => console.log(err));
   };
