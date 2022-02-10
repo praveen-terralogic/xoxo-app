@@ -1,10 +1,13 @@
 import "./VoucherPage.css";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { useSelector } from "react-redux";
 
 function VoucherPage() {
   const [Voucher, SetVoucher] = useState({});
+
+  const voucherList = useSelector((state) => state.voucherList);
+  console.log(voucherList);
 
   let param = useParams();
   const FixURL = (url) =>
@@ -19,15 +22,10 @@ function VoucherPage() {
 
   // Update Voucher
   const updateVoucher = () => {
-    axios
-      .get("https://fakestoreapi.com/products")
-      .then((res) => {
-        SetVoucher(
-          res.data.find((voucher) => FixURL(voucher.title) === param.id)
-        );
-        // console.log(Voucher);
-      })
-      .catch((err) => console.log(err));
+    SetVoucher(
+      voucherList.find((voucher) => FixURL(voucher.title) === param.id)
+    );
+    // console.log(Voucher);
   };
 
   return (

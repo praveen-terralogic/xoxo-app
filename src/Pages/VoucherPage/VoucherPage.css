@@ -12,6 +12,7 @@
 .voucher-wrapper-image img {
   max-height: 50vh;
   mix-blend-mode: multiply;
+  border-radius: 10px;
 }
 .voucher-wrapper-content h1 {
   font-size: 30px;
