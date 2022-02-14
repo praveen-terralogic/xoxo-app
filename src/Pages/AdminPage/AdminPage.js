@@ -6,8 +6,8 @@ function AdminPage() {
   const [Voucher, SetVoucher] = useState({
     title: "",
     price: "",
-    category: "",
     description: "",
+    category: "",
     image:
       "https://boltagency.ca/content/images/2020/03/placeholder-images-product-1_large.png",
     country_id: "",
@@ -24,6 +24,10 @@ function AdminPage() {
       value: {
         id: voucherList.length + 1,
         ...Voucher,
+        rating: {
+          rate: 5,
+          count: 100,
+        },
       },
     });
     console.log(voucherList);
